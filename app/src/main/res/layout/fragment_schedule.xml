@@ -1,0 +1,109 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wildan.makassar.ScheduleFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/relay">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@android:color/holo_blue_dark"
+                android:id="@+id/imageView2" />
+
+            <ImageView
+                android:layout_height="50dp"
+                app:srcCompat="@android:color/holo_purple"
+                android:id="@+id/bg1"
+                android:layout_width="150dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="17dp"
+                android:layout_marginEnd="17dp" />
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                app:srcCompat="@android:color/holo_purple"
+                android:id="@+id/bg"
+                android:layout_alignTop="@+id/bg1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp" />
+
+            <TextView
+                android:text="APR 12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="23dp"
+                android:layout_marginStart="23dp"
+                android:id="@+id/txtApr12"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:layout_below="@+id/txtSaturday"
+                android:layout_alignLeft="@+id/txtSaturday"
+                android:layout_alignStart="@+id/txtSaturday" />
+
+            <TextView
+                android:text="SATURDAY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSaturday"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_alignTop="@+id/bg"
+                android:layout_alignRight="@+id/bg"
+                android:layout_alignEnd="@+id/bg"
+                android:layout_marginRight="29dp"
+                android:layout_marginEnd="29dp" />
+
+            <TextView
+                android:text="SUNDAY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/bg1"
+                android:layout_alignLeft="@+id/bg1"
+                android:layout_alignStart="@+id/bg1"
+                android:layout_marginLeft="40dp"
+                android:layout_marginStart="40dp"
+                android:id="@+id/txtSunday"
+                android:textSize="18sp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:text="APR 13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtApr13"
+                android:textSize="12sp"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:layout_below="@+id/txtSunday"
+                android:layout_alignLeft="@+id/txtSunday"
+                android:layout_alignStart="@+id/txtSunday" />
+        </RelativeLayout>
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_schedule"
+            android:layout_below="@+id/relay"/>
+
+    </RelativeLayout>
+
+
+</FrameLayout>
