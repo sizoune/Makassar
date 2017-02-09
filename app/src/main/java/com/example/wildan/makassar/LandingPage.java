@@ -21,8 +21,7 @@ public class LandingPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Fragment fragment;
-    ImageView saturday, sunday;
-    TextView sat, sun, apr12, apr13;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +29,11 @@ public class LandingPage extends AppCompatActivity
         setContentView(R.layout.activity_landing_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        saturday = (ImageView) findViewById(R.id.bg);
-        sunday = (ImageView) findViewById(R.id.bg1);
 
-        sat = (TextView) findViewById(R.id.txtSaturday);
-        sun = (TextView) findViewById(R.id.txtSunday);
-        apr12 = (TextView) findViewById(R.id.txtApr12);
-        apr13 = (TextView) findViewById(R.id.txtApr13);
 
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,50 +49,7 @@ public class LandingPage extends AppCompatActivity
         ft.replace(R.id.mainframe, fragment);
         ft.commit();
 
-        saturday.setVisibility(View.VISIBLE);
-        sunday.setVisibility(View.GONE);
-        saturday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saturday.setVisibility(View.VISIBLE);
-                sunday.setVisibility(View.GONE);
-            }
-        });
-        sunday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sunday.setVisibility(View.VISIBLE);
-                saturday.setVisibility(View.GONE);
-            }
-        });
-        sat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saturday.setVisibility(View.VISIBLE);
-                sunday.setVisibility(View.GONE);
-            }
-        });
-        sun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sunday.setVisibility(View.VISIBLE);
-                saturday.setVisibility(View.GONE);
-            }
-        });
-        apr12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saturday.setVisibility(View.VISIBLE);
-                sunday.setVisibility(View.GONE);
-            }
-        });
-        apr13.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sunday.setVisibility(View.VISIBLE);
-                saturday.setVisibility(View.GONE);
-            }
-        });
+
     }
 
     @Override
@@ -169,13 +112,5 @@ public class LandingPage extends AppCompatActivity
         return true;
     }
 
-    public void setWarna(String hari) {
-        if (hari.equals("sabtu")) {
-            saturday.setVisibility(View.VISIBLE);
-            sunday.setVisibility(View.GONE);
-        } else {
-            sunday.setVisibility(View.VISIBLE);
-            saturday.setVisibility(View.GONE);
-        }
-    }
+
 }
