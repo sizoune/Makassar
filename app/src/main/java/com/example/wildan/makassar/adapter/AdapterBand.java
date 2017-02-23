@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.wildan.makassar.Model.Band;
 import com.example.wildan.makassar.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,7 @@ public class AdapterBand extends BaseAdapter {
             v = inflater.inflate(R.layout.list_row_bandlist, parent, false);
             ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
             TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
-            songko.setImageResource(R.drawable.masha);
+            Picasso.with(v.getContext()).load("http://static.tvtropes.org/pmwiki/pub/images/Penguins_of_Madagascar_-_Private_2051.jpg").into(songko);
             som.setText(band.getName());
         }
 
