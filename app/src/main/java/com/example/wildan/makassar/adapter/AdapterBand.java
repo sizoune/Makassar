@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by wildan on 16/02/17.
  */
 
-public class AdapterBand extends BaseAdapter{
+public class AdapterBand extends BaseAdapter {
     ArrayList<Band> daftarband;
     Context context;
 
@@ -44,14 +44,31 @@ public class AdapterBand extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.list_row_bandlist, parent, false);
-
-        ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
-        TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
+        View v;
 
         Band band = daftarband.get(position);
-        songko.setImageResource(R.drawable.masha);
-        som.setText(band.getName());
+        int type = getItemViewType(position);
+
+        if (type == 1) {
+            v = inflater.inflate(R.layout.list_row_sponsor, parent, false);
+        } else {
+            v = inflater.inflate(R.layout.list_row_bandlist, parent, false);
+            ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
+            TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
+            songko.setImageResource(R.drawable.masha);
+            som.setText(band.getName());
+        }
+
         return v;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return daftarband.get(position).getName().equals("spons") ? 1 : 0;
     }
 }

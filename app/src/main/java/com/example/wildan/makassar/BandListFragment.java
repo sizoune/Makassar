@@ -57,6 +57,7 @@ public class BandListFragment extends Fragment {
         lv.setAdapter(adapter);
         //getData();
         getAllArtist();
+
         adapter.notifyDataSetChanged();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,18 +73,6 @@ public class BandListFragment extends Fragment {
             }
         });
         return v;
-    }
-
-    void getData() {
-        Band b = new Band("Kangen", "alay", "");
-        Band a = new Band("Hilmi", "alay bingits", "");
-        Band c = new Band("Graham", "alay bet", "");
-        Band v = new Band("Desmon", "alay max", "");
-
-        daftarband.add(b);
-        daftarband.add(a);
-        daftarband.add(c);
-        daftarband.add(v);
     }
 
     private void getAllArtist() {
@@ -102,6 +91,8 @@ public class BandListFragment extends Fragment {
                                 Band b = new Band(object.optString("name", "woy kosong"), object.optString("desc", ""), object.optString("img_url", ""));
                                 daftarband.add(b);
                             }
+                            Band sponsor = new Band("spons", "spons", "spons");
+                            daftarband.add(sponsor);
                             adapter.notifyDataSetChanged();
                         } catch (Exception e) {
                             Toast.makeText(BandListFragment.this.getContext(), "error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
