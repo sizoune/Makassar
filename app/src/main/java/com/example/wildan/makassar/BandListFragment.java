@@ -1,6 +1,7 @@
 package com.example.wildan.makassar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -61,7 +62,13 @@ public class BandListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Band b = daftarband.get(position);
-                Toast.makeText(BandListFragment.this.getContext(), b.getDesc(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BandListFragment.this.getContext(), b.getDesc(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(BandListFragment.this.getContext(), DetailBand.class);
+                i.putExtra("namaband", b.getName());
+                i.putExtra("descband", b.getDesc());
+                i.putExtra("imgurl", b.getImg_url());
+                startActivity(i);
+
             }
         });
         return v;
@@ -92,7 +99,7 @@ public class BandListFragment extends Fragment {
 
                             for (int i = 0; i < listdata.length(); i++) {
                                 JSONObject object = listdata.getJSONObject(i);
-                                Band b = new Band(object.optString("name","woy kosong"),object.optString("desc",""),object.optString("img_url",""));
+                                Band b = new Band(object.optString("name", "woy kosong"), object.optString("desc", ""), object.optString("img_url", ""));
                                 daftarband.add(b);
                             }
                             adapter.notifyDataSetChanged();

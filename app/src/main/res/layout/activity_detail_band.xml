@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_detail_band"
     android:layout_width="match_parent"
@@ -10,4 +11,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wildan.makassar.DetailBand">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="142dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="51dp"
+        android:id="@+id/imageView" />
+
+    <TextView
+        android:text="Nama Band"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:id="@+id/txtNamaBand"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Desc Band"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNamaBand"
+        android:layout_alignLeft="@+id/txtNamaBand"
+        android:layout_alignStart="@+id/txtNamaBand"
+        android:layout_marginTop="30dp"
+        android:id="@+id/txtDesc" />
+
+    <TextView
+        android:text="url gambar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/txtNamaBand"
+        android:layout_alignStart="@+id/txtNamaBand"
+        android:layout_marginTop="18dp"
+        android:id="@+id/txtUrl" />
 </RelativeLayout>
