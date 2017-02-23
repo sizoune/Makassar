@@ -62,14 +62,15 @@ public class BandListFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Band b = daftarband.get(position);
-                //Toast.makeText(BandListFragment.this.getContext(), b.getDesc(), Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(BandListFragment.this.getContext(), DetailBand.class);
-                i.putExtra("namaband", b.getName());
-                i.putExtra("descband", b.getDesc());
-                i.putExtra("imgurl", b.getImg_url());
-                startActivity(i);
-
+                if (position != daftarband.size()) {
+                    Band b = daftarband.get(position);
+                    //Toast.makeText(BandListFragment.this.getContext(), b.getDesc(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(BandListFragment.this.getContext(), DetailBand.class);
+                    i.putExtra("namaband", b.getName());
+                    i.putExtra("descband", b.getDesc());
+                    i.putExtra("imgurl", b.getImg_url());
+                    startActivity(i);
+                }
             }
         });
         return v;
