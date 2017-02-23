@@ -9,7 +9,7 @@ public class Band {
     String desc;
     String img_url;
 
-    public Band(String img_url, String name, String desc) {
+    public Band(String name, String desc, String img_url) {
         this.img_url = img_url;
         this.name = name;
         this.desc = desc;

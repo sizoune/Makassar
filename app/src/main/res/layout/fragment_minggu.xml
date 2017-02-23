@@ -5,9 +5,9 @@
     tools:context="com.example.wildan.makassar.Minggu">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Minggu" />
-
+        android:id="@+id/listminggu" />
 </FrameLayout>
