@@ -1,6 +1,7 @@
 package com.example.wildan.makassar.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,7 @@ public class AdapterBand extends BaseAdapter {
             ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
             TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
             Picasso.with(v.getContext()).load(band.getImg_url()).into(songko);
+            som.setTextColor(Color.parseColor("#FFFFFF"));
             som.setText(band.getName());
         }
 

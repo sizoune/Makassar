@@ -17,9 +17,18 @@
         android:text="Nama Band"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
         android:id="@+id/textViewNamaBand"
-        android:layout_alignParentTop="true"
+        android:paddingLeft="15dp"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textStyle="normal|bold"
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/imageViewFotoBand"
         android:layout_toEndOf="@+id/imageViewFotoBand" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"
+        android:layout_below="@+id/imageViewFotoBand" />
+
 </RelativeLayout>
