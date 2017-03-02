@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.wildan.makassar.Model.Schedule;
 import com.example.wildan.makassar.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class AdapterSchedule extends BaseAdapter {
         TextView jadwal = (TextView) v.findViewById(R.id.textViewJadwal);
 
         Schedule s = daftarschedule.get(position);
-        foto.setImageResource(R.drawable.masha);
+        Picasso.with(v.getContext()).load(s.getImg_url()).into(foto);
         nama.setText(s.getBand());
         stage.setText(s.getStage());
         jadwal.setText(s.getStatus());

@@ -74,7 +74,7 @@ public class Minggu extends Fragment {
                             JSONArray listdata = data.getJSONArray("data");
                             for (int i = 0; i < listdata.length(); i++) {
                                 JSONObject object = listdata.getJSONObject(i);
-                                Schedule s = new Schedule(object.optString("stage", ""), object.optString("band", ""), object.optString("status", ""));
+                                Schedule s = new Schedule(object.optString("stage", ""), object.optString("band", ""), object.optString("status", ""), object.optString("img_url", ""));
                                 daftarschedule.add(s);
                             }
                             adapter.notifyDataSetChanged();
