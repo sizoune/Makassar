@@ -22,7 +22,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.SubscriptionEventListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -56,6 +61,21 @@ public class LandingPage extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.mainframe, fragment);
         ft.commit();
+
+        PusherOptions options = new PusherOptions();
+        options.setCluster("APP_CLUSTER");
+
+        Pusher pusher = new Pusher("APP_KEY", options);
+        pusher.connect();
+        Channel channel = pusher.subscribe("my-channel");
+        channel.bind("my-event", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+                Toast.makeText(LandingPage.this, data, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 //        Picasso.with(this)
 //                .load(R.drawable.bgnavigasi)
 //                .into(new Target() {

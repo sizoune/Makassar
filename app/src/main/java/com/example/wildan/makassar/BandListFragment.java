@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import com.example.wildan.makassar.adapter.AdapterBand;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,7 +92,8 @@ public class BandListFragment extends Fragment {
 
                             for (int i = 0; i < listdata.length(); i++) {
                                 JSONObject object = listdata.getJSONObject(i);
-                                Band b = new Band(object.optString("name", "woy kosong"), object.optString("desc", ""), object.optString("img_url", ""));
+                                Document document = Jsoup.parse(object.optString("desc", ""));
+                                Band b = new Band(object.optString("name", "woy kosong"), document.toString(), object.optString("img_url", ""));
                                 daftarband.add(b);
                             }
                             Band sponsor = new Band("spons", "spons", "spons");
@@ -129,5 +133,8 @@ public class BandListFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
         requestQueue.add(stringRequest);
     }
+
+
+
 
 }

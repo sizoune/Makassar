@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
-        android:icon="@drawable/iconm"
+        android:icon="@mipmap/ic_iconawal"
         android:hardwareAccelerated="false"
         android:label="Makassar90s"
         android:supportsRtl="true"
