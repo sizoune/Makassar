@@ -53,7 +53,7 @@ public class AdapterSchedule extends BaseAdapter {
 
         Schedule s = daftarschedule.get(position);
         foto.setImageResource(R.drawable.masha);
-        nama.setText(s.getBand().getName());
+        nama.setText(s.getBand());
         stage.setText(s.getStage());
         jadwal.setText(s.getStatus());
 

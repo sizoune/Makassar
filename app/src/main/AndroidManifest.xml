@@ -7,7 +7,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:hardwareAccelerated="false"
-        android:label=""
+        android:label="Makassar90s"
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -20,6 +20,7 @@
         </activity>
         <activity
             android:name=".LandingPage"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DetailBand"></activity>
     </application>

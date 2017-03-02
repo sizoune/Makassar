@@ -5,14 +5,13 @@ package com.example.wildan.makassar.Model;
  */
 
 public class Schedule {
-    String stage, date, status;
-    Band band;
+    String stage, band, status;
 
-    public Schedule(String stage, String date, String status, Band band) {
+
+    public Schedule(String stage, String band, String status) {
         this.stage = stage;
-        this.date = date;
-        this.status = status;
         this.band = band;
+        this.status = status;
     }
 
     public String getStage() {
@@ -23,14 +22,13 @@ public class Schedule {
         this.stage = stage;
     }
 
-    public String getDate() {
-        return date;
+    public String getBand() {
+        return band;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBand(String band) {
+        this.band = band;
     }
-
 
     public String getStatus() {
         return status;
@@ -40,11 +38,5 @@ public class Schedule {
         this.status = status;
     }
 
-    public Band getBand() {
-        return band;
-    }
 
-    public void setBand(Band band) {
-        this.band = band;
-    }
 }

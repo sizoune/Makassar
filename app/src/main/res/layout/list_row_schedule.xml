@@ -12,31 +12,47 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="Nama Band"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewNamaBandS"
-        android:textSize="30sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="Stage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewStage"
+        android:paddingLeft="1dp"
         android:textSize="14sp"
         android:layout_below="@+id/textViewNamaBandS"
         android:layout_alignLeft="@+id/textViewNamaBandS"
-        android:layout_alignStart="@+id/textViewNamaBandS" />
+        android:layout_alignStart="@+id/textViewNamaBandS"
+        android:textColor="@color/white"
+        android:textStyle="normal|bold" />
 
     <TextView
         android:text="Jadwal Manggung"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewJadwal"
+        android:textSize="14sp"
+        android:paddingLeft="1dp"
+        android:textColor="@color/white"
         android:layout_below="@+id/textViewStage"
         android:layout_alignLeft="@+id/textViewStage"
-        android:layout_alignStart="@+id/textViewStage"
-        android:layout_marginTop="11dp" />
+        android:layout_alignStart="@+id/textViewStage" />
+
+    <TextView
+        android:text="Nama Band"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewNamaBandS"
+        android:paddingLeft="1dp"
+        android:textSize="18sp"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/imageViewFotoSchedule"
+        android:layout_toEndOf="@+id/imageViewFotoSchedule" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"
+        android:layout_below="@+id/imageViewFotoSchedule" />
+
 </RelativeLayout>

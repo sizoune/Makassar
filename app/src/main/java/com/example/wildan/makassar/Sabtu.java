@@ -72,9 +72,7 @@ public class Sabtu extends Fragment {
                             JSONArray listdata = data.getJSONArray("data");
                             for (int i = 0; i < listdata.length(); i++) {
                                 JSONObject object = listdata.getJSONObject(i);
-                                JSONObject databand = object.getJSONObject("band");
-                                Band b = new Band(databand.optString("name", ""), databand.optString("desc", ""), databand.optString("img_url", ""));
-                                Schedule s = new Schedule(object.optString("stage", ""), object.optString("date", ""), object.optString("status", ""), b);
+                                Schedule s = new Schedule(object.optString("stage", ""), object.optString("band", ""), object.optString("status", ""));
                                 daftarschedule.add(s);
                             }
                             adapter.notifyDataSetChanged();
