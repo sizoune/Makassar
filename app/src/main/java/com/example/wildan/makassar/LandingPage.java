@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,11 +26,13 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.w3c.dom.Text;
+
 public class LandingPage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Fragment fragment;
-
+    TextView judul;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,8 @@ public class LandingPage extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        judul = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        judul.setText("SCHEDULE");
 
 
         fragment = new ScheduleFragment();
@@ -111,16 +115,19 @@ public class LandingPage extends AppCompatActivity
             fragment = new ScheduleFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainframe, fragment);
+            judul.setText("SCHEDULE");
             ft.commit();
         } else if (id == R.id.nav_artist) {
             fragment = new BandListFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainframe, fragment);
+            judul.setText("ARTIST");
             ft.commit();
         } else if (id == R.id.nav_map) {
             fragment = new MapFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.mainframe, fragment);
+            judul.setText("MAP");
             ft.commit();
         }
 
