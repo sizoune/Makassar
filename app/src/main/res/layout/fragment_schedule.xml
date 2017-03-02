@@ -11,7 +11,7 @@
         android:id="@+id/tabs"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        android:background="@color/material_blue_grey_800"
+        android:background="@drawable/bgnavigasi"
         app:tabIndicatorColor="#3498DB"
         app:tabSelectedTextColor="#3498DB"
         app:tabTextColor="@android:color/white"

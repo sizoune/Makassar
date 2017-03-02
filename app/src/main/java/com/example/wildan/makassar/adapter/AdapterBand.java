@@ -56,7 +56,7 @@ public class AdapterBand extends BaseAdapter {
             v = inflater.inflate(R.layout.list_row_bandlist, parent, false);
             ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
             TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
-            Picasso.with(v.getContext()).load("http://static.tvtropes.org/pmwiki/pub/images/Penguins_of_Madagascar_-_Private_2051.jpg").into(songko);
+            Picasso.with(v.getContext()).load(band.getImg_url()).into(songko);
             som.setText(band.getName());
         }
 

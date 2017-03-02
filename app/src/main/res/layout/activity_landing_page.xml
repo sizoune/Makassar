@@ -19,7 +19,29 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@drawable/bgnavigasi"
         app:headerLayout="@layout/nav_header_landing_page"
-        app:menu="@menu/activity_landing_page_drawer" />
+        app:menu="@menu/activity_landing_page_drawer" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="201dp"
+                android:layout_height="192dp"
+                app:srcCompat="@drawable/arcadegame"
+                android:id="@+id/imageView3" />
+        </LinearLayout>
+
+        </android.support.design.widget.NavigationView>
+
+
+
+
 
 </android.support.v4.widget.DrawerLayout>

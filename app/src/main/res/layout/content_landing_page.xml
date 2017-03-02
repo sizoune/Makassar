@@ -12,7 +12,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/backgorund1"
         android:id="@+id/mainframe"
-        ></FrameLayout>
+        >
+
+    </FrameLayout>
 
 </RelativeLayout>
