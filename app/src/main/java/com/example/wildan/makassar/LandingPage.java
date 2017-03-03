@@ -90,28 +90,6 @@ public class LandingPage extends AppCompatActivity
             }
         });
 
-
-//        Picasso.with(this)
-//                .load(R.drawable.bgnavigasi)
-//                .into(new Target() {
-//                          @Override
-//                          public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//                              relativeLayout.setBackground(new BitmapDrawable(getApplicationContext().getResources(), bitmap));
-//
-//                          }
-//
-//                          @Override
-//                          public void onBitmapFailed(Drawable errorDrawable) {
-//                              Log.d("TAG", "FAILED");
-//                          }
-//
-//                          @Override
-//                          public void onPrepareLoad(Drawable placeHolderDrawable) {
-//                              Log.d("TAG", "FAILED");
-//                          }
-//                      });
-        //ImageView tes = (ImageView) navigationView.findViewById(R.id.bgnav);
-        //Picasso.with(this).load(R.drawable.bgnavigasi).fit().centerCrop().into(tes);
     }
 
     @Override
