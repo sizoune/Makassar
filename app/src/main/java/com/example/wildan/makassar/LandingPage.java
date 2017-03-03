@@ -72,8 +72,8 @@ public class LandingPage extends AppCompatActivity
         options.setCluster("api");
 
         Pusher pusher = new Pusher("4e1d38e3b79e0b7eb0b2", options);
-        Channel channel = pusher.subscribe("schedule");
         pusher.connect();
+        Channel channel = pusher.subscribe("schedule");
         channel.bind("schedule_status_changed", new SubscriptionEventListener() {
             @Override
             public void onEvent(String channelName, String eventName, final String data) {
