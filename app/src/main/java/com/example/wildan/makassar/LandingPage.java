@@ -1,5 +1,10 @@
 package com.example.wildan.makassar;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -63,15 +69,24 @@ public class LandingPage extends AppCompatActivity
         ft.commit();
 
         PusherOptions options = new PusherOptions();
-        options.setCluster("APP_CLUSTER");
+        options.setCluster("api");
 
-        Pusher pusher = new Pusher("APP_KEY", options);
+        Pusher pusher = new Pusher("4e1d38e3b79e0b7eb0b2", options);
+        Channel channel = pusher.subscribe("schedule");
         pusher.connect();
-        Channel channel = pusher.subscribe("my-channel");
-        channel.bind("my-event", new SubscriptionEventListener() {
+        channel.bind("schedule_status_changed", new SubscriptionEventListener() {
             @Override
             public void onEvent(String channelName, String eventName, final String data) {
-                Toast.makeText(LandingPage.this, data, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LandingPage.this, data, Toast.LENGTH_SHORT).show();
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
+                mBuilder.setSmallIcon(R.drawable.notif);
+                mBuilder.setContentTitle(eventName);
+                mBuilder.setContentText(data);
+                Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(0, mBuilder.build());
             }
         });
 
@@ -95,8 +110,8 @@ public class LandingPage extends AppCompatActivity
 //                              Log.d("TAG", "FAILED");
 //                          }
 //                      });
-                        //ImageView tes = (ImageView) navigationView.findViewById(R.id.bgnav);
-                        //Picasso.with(this).load(R.drawable.bgnavigasi).fit().centerCrop().into(tes);
+        //ImageView tes = (ImageView) navigationView.findViewById(R.id.bgnav);
+        //Picasso.with(this).load(R.drawable.bgnavigasi).fit().centerCrop().into(tes);
     }
 
     @Override
