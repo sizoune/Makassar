@@ -69,27 +69,29 @@ public class LandingPage extends AppCompatActivity
         ft.commit();
 
         PusherOptions options = new PusherOptions();
-        options.setCluster("api");
+        options.setCluster("ap1");
 
         Pusher pusher = new Pusher("4e1d38e3b79e0b7eb0b2", options);
-        pusher.connect();
         Channel channel = pusher.subscribe("schedule");
         channel.bind("schedule_status_changed", new SubscriptionEventListener() {
             @Override
-            public void onEvent(String channelName, String eventName, final String data) {
-                //Toast.makeText(LandingPage.this, data, Toast.LENGTH_SHORT).show();
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
-                mBuilder.setSmallIcon(R.drawable.notif);
-                mBuilder.setContentTitle(eventName);
-                mBuilder.setContentText(data);
-                Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
-                PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(0, mBuilder.build());
+            public void onEvent(String channelName, final String eventName, final String data) {
+                LandingPage.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
+                        mBuilder.setSmallIcon(R.drawable.notif);
+                        mBuilder.setContentTitle(eventName);
+                        mBuilder.setContentText(data);
+                        Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
+                        PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                        mBuilder.setContentIntent(resultPendingIntent);
+                        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        mNotificationManager.notify(001, mBuilder.build());
+                    }
+                });
             }
         });
-
+        pusher.connect();
     }
 
     @Override
