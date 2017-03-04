@@ -79,9 +79,9 @@ public class LandingPage extends AppCompatActivity
                 LandingPage.this.runOnUiThread(new Runnable() {
                     public void run() {
                         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
-                        mBuilder.setSmallIcon(R.drawable.notif);
-                        mBuilder.setContentTitle(eventName);
-                        mBuilder.setContentText(data);
+                        mBuilder.setSmallIcon(R.drawable.notificon);
+                        mBuilder.setContentTitle("Schedule Changed !");
+                        mBuilder.setContentText("Check your Makassar90's App now");
                         Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
                         PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                         mBuilder.setContentIntent(resultPendingIntent);
