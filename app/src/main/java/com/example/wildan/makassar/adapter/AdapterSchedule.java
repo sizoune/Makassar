@@ -57,7 +57,13 @@ public class AdapterSchedule extends BaseAdapter {
         nama.setText(s.getBand());
         stage.setText(s.getStage());
         jadwal.setText(s.getStatus());
-
+        if (s.getStatus().equals("ENDED")) {
+            jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border1));
+        } else if (s.getStatus().equals("TBD")) {
+            jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border2));
+        } else {
+            jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border));
+        }
         return v;
     }
 }

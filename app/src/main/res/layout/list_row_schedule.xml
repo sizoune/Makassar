@@ -17,11 +17,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewStage"
-        android:paddingLeft="1dp"
         android:textSize="14sp"
+        android:layout_marginLeft="5dp"
         android:layout_below="@+id/textViewNamaBandS"
-        android:layout_alignLeft="@+id/textViewNamaBandS"
-        android:layout_alignStart="@+id/textViewNamaBandS"
+        android:layout_toRightOf="@+id/imageViewFotoSchedule"
+        android:layout_toEndOf="@+id/imageViewFotoSchedule"
         android:textColor="@color/white"
         android:textStyle="normal|bold" />
 
@@ -31,18 +31,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewJadwal"
         android:textSize="14sp"
-        android:paddingLeft="1dp"
         android:textColor="@color/white"
+        android:background="@drawable/my_border"
+        android:layout_marginLeft="5dp"
         android:layout_below="@+id/textViewStage"
-        android:layout_alignLeft="@+id/textViewStage"
-        android:layout_alignStart="@+id/textViewStage" />
+        android:layout_toRightOf="@+id/imageViewFotoSchedule"
+        android:layout_toEndOf="@+id/imageViewFotoSchedule"
+         />
 
     <TextView
         android:text="Nama Band"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewNamaBandS"
-        android:paddingLeft="1dp"
+        android:layout_marginLeft="5dp"
         android:textSize="18sp"
         android:layout_marginTop="22dp"
         android:textColor="@color/white"
