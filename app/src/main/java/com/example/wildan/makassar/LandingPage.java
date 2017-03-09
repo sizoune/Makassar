@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -124,28 +125,31 @@ public class LandingPage extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_lineup) {
-            fragment = new ScheduleFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainframe, fragment);
-            judul.setText("SCHEDULE");
-            ft.commit();
-        } else if (id == R.id.nav_artist) {
-            fragment = new BandListFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainframe, fragment);
-            judul.setText("ARTIST");
-            ft.commit();
-        } else if (id == R.id.nav_map) {
-            fragment = new MapFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.mainframe, fragment);
-            judul.setText("MAP");
-            ft.commit();
-        }
-
+        final int id = item.getItemId();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (id == R.id.nav_lineup) {
+                    fragment = new ScheduleFragment();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.mainframe, fragment);
+                    judul.setText("SCHEDULE");
+                    ft.commit();
+                } else if (id == R.id.nav_artist) {
+                    fragment = new BandListFragment();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.mainframe, fragment);
+                    judul.setText("ARTIST");
+                    ft.commit();
+                } else if (id == R.id.nav_map) {
+                    fragment = new MapFragment();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.mainframe, fragment);
+                    judul.setText("MAP");
+                    ft.commit();
+                }
+            }
+        }, 200);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
