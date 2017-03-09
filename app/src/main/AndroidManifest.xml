@@ -6,7 +6,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_iconawal"
+        android:icon="@drawable/notificon"
         android:label="Makassar90s"
         android:largeHeap="true"
         android:supportsRtl="true"
