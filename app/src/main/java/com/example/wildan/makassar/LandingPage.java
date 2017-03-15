@@ -94,6 +94,34 @@ public class LandingPage extends AppCompatActivity
                 });
             }
         });
+        mSocket.on("tenant-channel", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                LandingPage.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        JSONObject data = (JSONObject) args[0];
+                        try {
+                            JSONObject isi = data.getJSONObject("tenant");
+                            String nama = (String) isi.get("name");
+                            String status = (String) isi.get("status");
+                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
+                            mBuilder.setSmallIcon(R.drawable.notificon);
+                            mBuilder.setContentTitle("Tenant Changed !");
+                            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                            mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nama + "\n"
+                                    + status));
+                            mBuilder.setSound(soundUri);
+                            mBuilder.setAutoCancel(true);
+                            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                            mNotificationManager.notify(0, mBuilder.build());
+                        } catch (Exception e) {
+                            Toast.makeText(LandingPage.this, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
         mSocket.connect();
     }
 
