@@ -28,15 +28,21 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class BandListFragment extends Fragment {
     ArrayList<Band> daftarband;
     AdapterBand adapter;
-    ListView lv;
+    FastSearchListView lv;
+    String[] namaband;
 
     public BandListFragment() {
         // Required empty public constructor
@@ -56,11 +62,11 @@ public class BandListFragment extends Fragment {
         daftarband = new ArrayList<>();
         View v = inflater.inflate(R.layout.fragment_band_list, container, false);
         adapter = new AdapterBand(daftarband, BandListFragment.this.getContext());
-        lv = (ListView) v.findViewById(R.id.listband);
+        lv = (FastSearchListView) v.findViewById(R.id.listband);
+        //lv.setFastScrollEnabled(true);
         lv.setAdapter(adapter);
         //getData();
         getAllArtist();
-
         adapter.notifyDataSetChanged();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,6 +102,7 @@ public class BandListFragment extends Fragment {
                                 Band b = new Band(object.optString("name", "woy kosong"), document.toString(), object.optString("img_url", ""));
                                 daftarband.add(b);
                             }
+                            Collections.sort(daftarband);
                             Band sponsor = new Band("spons", "spons", "spons");
                             daftarband.add(sponsor);
                             adapter.notifyDataSetChanged();

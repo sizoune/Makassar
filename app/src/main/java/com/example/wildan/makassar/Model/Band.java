@@ -1,10 +1,12 @@
 package com.example.wildan.makassar.Model;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by wildan on 09/02/17.
  */
 
-public class Band {
+public class Band implements Comparable<Band>{
     String name;
     String desc;
     String img_url;
@@ -37,5 +39,10 @@ public class Band {
 
     public void setImg_url(String img_url) {
         this.img_url = img_url;
+    }
+
+    @Override
+    public int compareTo(Band band) {
+        return (this.name).compareTo(band.getName());
     }
 }
