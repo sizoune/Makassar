@@ -1,5 +1,6 @@
 package com.example.wildan.makassar;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -17,17 +18,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.net.URISyntaxException;
-
-import io.socket.client.IO;
+import br.com.goncalves.pugnotification.notification.PugNotification;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+import me.drakeet.materialdialog.MaterialDialog;
 
 
 public class LandingPage extends AppCompatActivity
@@ -35,7 +41,11 @@ public class LandingPage extends AppCompatActivity
 
     Fragment fragment;
     TextView judul;
+    NotificationCompat.Builder mBuilder;
+    Uri soundUri;
+    MaterialDialog mMaterialDialog;
     private Socket mSocket;
+    private PopupWindow pw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +70,25 @@ public class LandingPage extends AppCompatActivity
         ft.replace(R.id.mainframe, fragment);
         ft.commit();
 
+        mBuilder = new NotificationCompat.Builder(LandingPage.this);
+        mBuilder.setSmallIcon(R.drawable.notificon);
+        soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        mBuilder.setSound(soundUri);
+
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            mMaterialDialog = new MaterialDialog(this)
+                    .setTitle("Schedule Changed !")
+                    .setMessage("Band : " + b.getString("nama") + "\nStatus : " + b.getString("status"))
+                    .setPositiveButton("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mMaterialDialog.dismiss();
+                        }
+                    });
+            mMaterialDialog.show();
+        }
+
         SocketConnect app = new SocketConnect();
         mSocket = app.getmSocket();
         mSocket.on("schedule-channel", new Emitter.Listener() {
@@ -73,20 +102,24 @@ public class LandingPage extends AppCompatActivity
                             JSONObject isi = data.getJSONObject("schedule");
                             String nama = (String) isi.get("name");
                             String status = (String) isi.get("status");
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
-                            mBuilder.setSmallIcon(R.drawable.notificon);
-                            mBuilder.setContentTitle("Schedule Changed !");
-                            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                            mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText("Band : " + nama + "\n"
-                                    + "Status : " + status + "\n"
-                                    + "Click for details !"));
-                            mBuilder.setSound(soundUri);
                             Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
-                            PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            mBuilder.setContentIntent(resultPendingIntent);
-                            mBuilder.setAutoCancel(true);
-                            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                            mNotificationManager.notify(0, mBuilder.build());
+                            resultIntent.putExtra("nama", nama);
+                            resultIntent.putExtra("status", status);
+                            PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 01, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+                            PugNotification.with(LandingPage.this)
+                                    .load()
+                                    .title("Schedule Changed !")
+                                    .message("Click for details !")
+                                    .click(resultPendingIntent)
+                                    .smallIcon(R.drawable.notificon)
+                                    .largeIcon(R.drawable.notificon)
+                                    .flags(Notification.DEFAULT_ALL)
+                                    .sound(soundUri)
+                                    .autoCancel(true)
+                                    .identifier(1)
+                                    .simple()
+                                    .build();
+//
                         } catch (Exception e) {
                             Toast.makeText(LandingPage.this, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -100,21 +133,29 @@ public class LandingPage extends AppCompatActivity
                 LandingPage.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //Toast.makeText(LandingPage.this, "tes", Toast.LENGTH_LONG).show();
                         JSONObject data = (JSONObject) args[0];
                         try {
                             JSONObject isi = data.getJSONObject("tenant");
                             String nama = (String) isi.get("name");
                             String status = (String) isi.get("status");
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(LandingPage.this);
-                            mBuilder.setSmallIcon(R.drawable.notificon);
-                            mBuilder.setContentTitle("Tenant Changed !");
-                            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                            mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(nama + "\n"
-                                    + status));
-                            mBuilder.setSound(soundUri);
-                            mBuilder.setAutoCancel(true);
-                            NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                            mNotificationManager.notify(0, mBuilder.build());
+                            Intent resultIntent = new Intent(LandingPage.this, TenantAndSponsor.class);
+                            resultIntent.putExtra("nama", nama);
+                            resultIntent.putExtra("status", status);
+                            PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 01, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+                            PugNotification.with(LandingPage.this)
+                                    .load()
+                                    .title("Tenant Changed !")
+                                    .message("Click for details !")
+                                    .click(resultPendingIntent)
+                                    .smallIcon(R.drawable.notificon)
+                                    .largeIcon(R.drawable.notificon)
+                                    .flags(Notification.DEFAULT_ALL)
+                                    .sound(soundUri)
+                                    .identifier(2)
+                                    .autoCancel(true)
+                                    .simple()
+                                    .build();
                         } catch (Exception e) {
                             Toast.makeText(LandingPage.this, "Error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -177,6 +218,9 @@ public class LandingPage extends AppCompatActivity
                     ft.replace(R.id.mainframe, fragment);
                     judul.setText("MAP");
                     ft.commit();
+                } else if (id == R.id.nav_tenspon) {
+                    Intent intent = new Intent(LandingPage.this, TenantAndSponsor.class);
+                    startActivity(intent);
                 }
             }
         }, 200);

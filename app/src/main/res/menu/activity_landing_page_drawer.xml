@@ -5,15 +5,18 @@
         <item
             android:id="@+id/nav_lineup"
             android:icon="@drawable/menu"
-            android:title="Line Up" />
+            android:title="Schedule" />
         <item
             android:id="@+id/nav_artist"
             android:icon="@drawable/avatar"
-            android:title="Artist" />
+            android:title="Line Up" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/map"
             android:title="Map" />
+        <item
+            android:id="@+id/nav_tenspon"
+            android:title="Tenant and Sponsor" />
     </group>
 
 

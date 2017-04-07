@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_element"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#424242"
+    android:padding="10px">
+
+    <RelativeLayout
+        android:id="@+id/pop1"
+        android:layout_width="match_parent"
+        android:layout_height="480dp">
+
+        <TextView
+            android:id="@+id/judulband"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Band"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/txtband"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/judulband"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:text="Band"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/judulstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtband"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:text="Status"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/judulstatus"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:text="Status"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnWIndow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pop1"
+        android:background="#FF4081"
+        android:text="OK"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

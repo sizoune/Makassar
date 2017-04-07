@@ -1,5 +1,8 @@
 package com.example.wildan.makassar;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import java.net.URISyntaxException;
 
 import io.socket.client.IO;
@@ -16,7 +19,7 @@ public class SocketConnect {
         try {
             mSocket = IO.socket("http://188.166.187.3:3000");
         } catch (URISyntaxException e) {
-
+            Log.d("socket error",e.getMessage());
         }
     }
 
