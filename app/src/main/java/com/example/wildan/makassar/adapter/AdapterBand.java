@@ -54,29 +54,19 @@ public class AdapterBand extends BaseAdapter implements SectionIndexer {
         Band band = daftarband.get(position);
         int type = getItemViewType(position);
 
-        if (type == 1) {
-            v = inflater.inflate(R.layout.list_row_sponsor, parent, false);
-        } else {
-            v = inflater.inflate(R.layout.list_row_bandlist, parent, false);
-            ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
-            TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
-            Picasso.with(v.getContext()).load(band.getImg_url()).into(songko);
-            som.setTextColor(Color.parseColor("#FFFFFF"));
-            som.setText(band.getName());
-        }
+
+        v = inflater.inflate(R.layout.list_row_bandlist, parent, false);
+        ImageView songko = (ImageView) v.findViewById(R.id.imageViewFotoBand);
+        TextView som = (TextView) v.findViewById(R.id.textViewNamaBand);
+        Picasso.with(v.getContext()).load(band.getImg_url()).into(songko);
+        som.setTextColor(Color.parseColor("#FFFFFF"));
+        som.setText(band.getName());
+
 
         return v;
     }
 
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
 
-    @Override
-    public int getItemViewType(int position) {
-        return daftarband.get(position).getName().equals("spons") ? 1 : 0;
-    }
 
     @Override
     public Object[] getSections() {

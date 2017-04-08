@@ -103,8 +103,6 @@ public class BandListFragment extends Fragment {
                                 daftarband.add(b);
                             }
                             Collections.sort(daftarband);
-                            Band sponsor = new Band("spons", "spons", "spons");
-                            daftarband.add(sponsor);
                             adapter.notifyDataSetChanged();
                         } catch (Exception e) {
                             Toast.makeText(BandListFragment.this.getContext(), "error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -140,8 +138,6 @@ public class BandListFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
         requestQueue.add(stringRequest);
     }
-
-
 
 
 }
