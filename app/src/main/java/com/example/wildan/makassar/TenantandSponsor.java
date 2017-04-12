@@ -1,8 +1,11 @@
 package com.example.wildan.makassar;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,8 +19,8 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.Transformers.BaseTransformer;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.example.wildan.makassar.Model.Schedule;
 import com.example.wildan.makassar.Model.Tenant;
 
 import org.json.JSONArray;
@@ -29,27 +32,35 @@ import java.util.Map;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
-public class TenantAndSponsor extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class TenantandSponsor extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
     MaterialDialog mMaterialDialog;
     private ArrayList<Tenant> daftarTenant;
     private SliderLayout mDemoSlider, mDemoSlider1;
 
+    public TenantandSponsor() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tenant_and_sponsor);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_tenantand_sponsor, container, false);
+
         daftarTenant = new ArrayList<>();
         getAllSchedule();
-        mDemoSlider = (SliderLayout) findViewById(R.id.slider1);
-        mDemoSlider1 = (SliderLayout) findViewById(R.id.slider);
+        mDemoSlider = (SliderLayout) v.findViewById(R.id.slider1);
+        mDemoSlider1 = (SliderLayout) v.findViewById(R.id.slider);
 
         HashMap<String, String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
+        url_maps.put("Apply Now !", "http://www.endeavourpto.org/wp-content/uploads/2016/08/become-a-sponsor-1.png");
         for (String name : url_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
+            TextSliderView textSliderView = new TextSliderView(TenantandSponsor.this.getContext());
             // initialize a SliderLayout
             textSliderView
                     .description(name)
@@ -64,28 +75,40 @@ public class TenantAndSponsor extends AppCompatActivity implements BaseSliderVie
 
             mDemoSlider1.addSlider(textSliderView);
         }
-        mDemoSlider1.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        mDemoSlider1.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider1.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider1.setDuration(4000);
+        mDemoSlider1.stopAutoCycle();
+        mDemoSlider1.setPagerTransformer(false, new BaseTransformer() {
+            @Override
+            protected void onTransform(View view, float v) {
+            }
+        });
+//        mDemoSlider1.setPresetTransformer(SliderLayout.Transformer.Accordion);
+//        mDemoSlider1.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//        mDemoSlider1.setCustomAnimation(new DescriptionAnimation());
+//        mDemoSlider1.setDuration(4000);
 
-        Bundle b = getIntent().getExtras();
-        if (b != null) {
-            mMaterialDialog = new MaterialDialog(this)
-                    .setTitle("Tenant Changed !")
-                    .setMessage("Tenant name : " + b.getString("nama") + "\nStatus : " + b.getString("status"))
-                    .setPositiveButton("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mMaterialDialog.dismiss();
-                        }
-                    });
-            mMaterialDialog.show();
+        try {
+            if (getArguments().getString("nama") != null) {
+                mMaterialDialog = new MaterialDialog(TenantandSponsor.this.getContext())
+                        .setTitle("Tenant Changed !")
+                        .setMessage("Tenant name : " + getArguments().getString("nama") + "\nStatus : " + getArguments().getString("status"))
+                        .setPositiveButton("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+                mMaterialDialog.show();
+            }
+        } catch (Exception e) {
+
         }
+
+
+        return v;
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         mDemoSlider.stopAutoCycle();
         super.onStop();
     }
@@ -106,12 +129,12 @@ public class TenantAndSponsor extends AppCompatActivity implements BaseSliderVie
                                 daftarTenant.add(t);
                             }
                             for (Tenant t : daftarTenant) {
-                                TextSliderView textSliderView = new TextSliderView(getApplicationContext());
+                                TextSliderView textSliderView = new TextSliderView(TenantandSponsor.this.getContext());
                                 textSliderView
                                         .description(t.getNama())
                                         .image(t.getUrlgambar())
                                         .setScaleType(BaseSliderView.ScaleType.Fit)
-                                        .setOnSliderClickListener(TenantAndSponsor.this);
+                                        .setOnSliderClickListener(TenantandSponsor.this);
                                 textSliderView.bundle(new Bundle());
                                 textSliderView.getBundle()
                                         .putString("extra", t.getStatus());
@@ -119,13 +142,13 @@ public class TenantAndSponsor extends AppCompatActivity implements BaseSliderVie
                                 mDemoSlider.addSlider(textSliderView);
                             }
 
-                            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOut);
+                            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
                             mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                             mDemoSlider.setCustomAnimation(new DescriptionAnimation());
                             mDemoSlider.setDuration(4000);
-                            mDemoSlider.addOnPageChangeListener(TenantAndSponsor.this);
+                            mDemoSlider.addOnPageChangeListener(TenantandSponsor.this);
                         } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), "error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TenantandSponsor.this.getContext(), "error : " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 //tempat response di dapatkan
                     }
@@ -135,7 +158,7 @@ public class TenantAndSponsor extends AppCompatActivity implements BaseSliderVie
                     public void onErrorResponse(VolleyError error) {
                         //You can handle error here if you want
                         error.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "erroring: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TenantandSponsor.this.getContext(), "erroring: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -148,20 +171,20 @@ public class TenantAndSponsor extends AppCompatActivity implements BaseSliderVie
                     //returning parameter
                     return params;
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TenantandSponsor.this.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     return params;
                 }
             }
         };
 
         //Adding the string request to the queue
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(TenantandSponsor.this.getContext());
         requestQueue.add(stringRequest);
     }
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(TenantandSponsor.this.getContext(), slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
     @Override

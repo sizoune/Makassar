@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -23,12 +24,17 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wildan.makassar.Model.DataNotif;
+
 import org.json.JSONObject;
+
+import java.io.Serializable;
 
 import br.com.goncalves.pugnotification.notification.PugNotification;
 import io.socket.client.Socket;
@@ -44,6 +50,8 @@ public class LandingPage extends AppCompatActivity
     NotificationCompat.Builder mBuilder;
     Uri soundUri;
     MaterialDialog mMaterialDialog;
+    String tenantname, tenantstatus, schename, schestat;
+    DataNotif note;
     private Socket mSocket;
     private PopupWindow pw;
 
@@ -77,16 +85,33 @@ public class LandingPage extends AppCompatActivity
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
-            mMaterialDialog = new MaterialDialog(this)
-                    .setTitle("Schedule Changed !")
-                    .setMessage("Band : " + b.getString("nama") + "\nStatus : " + b.getString("status"))
-                    .setPositiveButton("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mMaterialDialog.dismiss();
-                        }
-                    });
-            mMaterialDialog.show();
+            DataNotif tenant = (DataNotif) getIntent().getSerializableExtra("data1");
+            DataNotif baru = (DataNotif) getIntent().getSerializableExtra("data");
+            if (baru != null) {
+                mMaterialDialog = new MaterialDialog(this)
+                        .setTitle("Schedule Changed !")
+                        .setMessage("Band : " + baru.getNama() + "\nStatus : " + baru.getStatus())
+                        .setPositiveButton("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+                            }
+                        });
+                mMaterialDialog.show();
+            } else if (tenant != null) {
+                getWindow().setFlags(
+                        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+                fragment = new TenantandSponsor();
+                Bundle bundle = new Bundle();
+                bundle.putString("nama", tenant.getNama());
+                bundle.putString("status", tenant.getStatus());
+                fragment.setArguments(bundle);
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.mainframe, fragment);
+                judul.setText("SPONSOR");
+                ft.commit();
+            }
         }
 
         SocketConnect app = new SocketConnect();
@@ -100,11 +125,11 @@ public class LandingPage extends AppCompatActivity
                         JSONObject data = (JSONObject) args[0];
                         try {
                             JSONObject isi = data.getJSONObject("schedule");
-                            String nama = (String) isi.get("name");
-                            String status = (String) isi.get("status");
+                            note = new DataNotif((String) isi.get("name"), (String) isi.get("status"));
+                            Bundle bb = new Bundle();
+                            bb.putSerializable("data", note);
                             Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
-                            resultIntent.putExtra("nama", nama);
-                            resultIntent.putExtra("status", status);
+                            resultIntent.putExtras(bb);
                             PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 01, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
                             PugNotification.with(LandingPage.this)
                                     .load()
@@ -137,11 +162,11 @@ public class LandingPage extends AppCompatActivity
                         JSONObject data = (JSONObject) args[0];
                         try {
                             JSONObject isi = data.getJSONObject("tenant");
-                            String nama = (String) isi.get("name");
-                            String status = (String) isi.get("status");
-                            Intent resultIntent = new Intent(LandingPage.this, TenantAndSponsor.class);
-                            resultIntent.putExtra("nama", nama);
-                            resultIntent.putExtra("status", status);
+                            note = new DataNotif((String) isi.get("name"), (String) isi.get("status"));
+                            Bundle bb = new Bundle();
+                            bb.putSerializable("data1", note);
+                            Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
+                            resultIntent.putExtras(bb);
                             PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 01, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
                             PugNotification.with(LandingPage.this)
                                     .load()
@@ -219,8 +244,14 @@ public class LandingPage extends AppCompatActivity
                     judul.setText("MAP");
                     ft.commit();
                 } else if (id == R.id.nav_tenspon) {
-                    Intent intent = new Intent(LandingPage.this, TenantAndSponsor.class);
-                    startActivity(intent);
+                    fragment = new TenantandSponsor();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.mainframe, fragment);
+                    judul.setText("SPONSOR");
+                    ft.commit();
+                    getWindow().setFlags(
+                            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
                 }
             }
         }, 200);

@@ -27,10 +27,6 @@
         <activity
             android:name=".DetailBand"
             android:parentActivityName=".LandingPage" />
-        <activity
-            android:name=".TenantAndSponsor"
-            android:hardwareAccelerated="true"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -61,8 +61,10 @@ public class AdapterSchedule extends BaseAdapter {
             jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border1));
         } else if (s.getStatus().equals("TBD")) {
             jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border2));
-        } else {
+        } else if (s.getStatus().equals("NOW SHOWING")) {
             jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border));
+        } else {
+            jadwal.setBackground(v.getResources().getDrawable(R.drawable.my_border3));
         }
         return v;
     }
