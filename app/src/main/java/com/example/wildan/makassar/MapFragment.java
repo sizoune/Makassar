@@ -31,7 +31,7 @@ public class MapFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_map, container, false);
 
         PhotoView photoView = (PhotoView) v.findViewById(R.id.photo_view);
-        photoView.setImageResource(R.drawable.logoidev);
+        photoView.setImageResource(R.drawable.mapp);
 
         return v;
     }

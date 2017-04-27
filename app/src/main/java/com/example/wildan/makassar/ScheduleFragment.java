@@ -99,9 +99,9 @@ public class ScheduleFragment extends Fragment {
 
             switch (position){
                 case 0 :
-                    return "Sabtu"+"\nMAY 5";
+                    return "Saturday"+"\nMAY 5";
                 case 1 :
-                    return "Minggu"+"\nMAY 6";
+                    return "Sunday"+"\nMAY 6";
             }
             return null;
         }
