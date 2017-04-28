@@ -165,9 +165,10 @@ public class LandingPage extends AppCompatActivity
                         JSONObject data = (JSONObject) args[0];
                         try {
                             JSONObject isi = data.getJSONObject("tenant");
+                            //Toast.makeText(LandingPage.this, isi.toString(), Toast.LENGTH_LONG).show();
                             note1 = new NotifTenant((String) isi.get("name"), (String) isi.get("desc"), (String) isi.get("status"));
                             Bundle bb = new Bundle();
-                            bb.putSerializable("data1", note);
+                            bb.putSerializable("data1", note1);
                             Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);
                             resultIntent.putExtras(bb);
                             PendingIntent resultPendingIntent = PendingIntent.getActivity(LandingPage.this, 01, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
