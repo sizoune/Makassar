@@ -23,6 +23,7 @@
         android:layout_toEndOf="@+id/imageViewFotoBand"
         android:layout_toRightOf="@+id/imageViewFotoBand"
         android:paddingLeft="15dp"
+        android:layout_marginRight="20dp"
         android:text="Nama Band"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textStyle="normal|bold" />

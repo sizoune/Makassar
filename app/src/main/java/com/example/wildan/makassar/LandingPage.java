@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wildan.makassar.Model.DataNotif;
+import com.example.wildan.makassar.Model.NotifTenant;
 
 import org.json.JSONObject;
 
@@ -52,6 +53,7 @@ public class LandingPage extends AppCompatActivity
     MaterialDialog mMaterialDialog;
     String tenantname, tenantstatus, schename, schestat;
     DataNotif note;
+    NotifTenant note1;
     private Socket mSocket;
     private PopupWindow pw;
 
@@ -85,7 +87,7 @@ public class LandingPage extends AppCompatActivity
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
-            DataNotif tenant = (DataNotif) getIntent().getSerializableExtra("data1");
+            NotifTenant tenant = (NotifTenant) getIntent().getSerializableExtra("data1");
             DataNotif baru = (DataNotif) getIntent().getSerializableExtra("data");
             if (baru != null) {
                 mMaterialDialog = new MaterialDialog(this)
@@ -106,6 +108,7 @@ public class LandingPage extends AppCompatActivity
                 Bundle bundle = new Bundle();
                 bundle.putString("nama", tenant.getNama());
                 bundle.putString("status", tenant.getStatus());
+                bundle.putString("desc", tenant.getDeskripsi());
                 fragment.setArguments(bundle);
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.mainframe, fragment);
@@ -162,7 +165,7 @@ public class LandingPage extends AppCompatActivity
                         JSONObject data = (JSONObject) args[0];
                         try {
                             JSONObject isi = data.getJSONObject("tenant");
-                            note = new DataNotif((String) isi.get("name"), (String) isi.get("status"));
+                            note1 = new NotifTenant((String) isi.get("name"), (String) isi.get("desc"), (String) isi.get("status"));
                             Bundle bb = new Bundle();
                             bb.putSerializable("data1", note);
                             Intent resultIntent = new Intent(LandingPage.this, LandingPage.class);

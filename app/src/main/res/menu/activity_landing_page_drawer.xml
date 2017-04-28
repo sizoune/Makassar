@@ -16,6 +16,7 @@
             android:title="Map" />
         <item
             android:id="@+id/nav_tenspon"
+            android:icon="@drawable/market"
             android:title="Tenant and Sponsor" />
     </group>
 

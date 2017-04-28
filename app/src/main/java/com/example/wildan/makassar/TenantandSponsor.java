@@ -94,7 +94,7 @@ public class TenantandSponsor extends Fragment implements BaseSliderView.OnSlide
             if (getArguments().getString("nama") != null) {
                 mMaterialDialog = new MaterialDialog(TenantandSponsor.this.getContext())
                         .setTitle("Tenant Changed !")
-                        .setMessage("Tenant name : " + getArguments().getString("nama") + "\nStatus : " + getArguments().getString("status"))
+                        .setMessage("Tenant name : " + getArguments().getString("nama")+ "\nDescription : " + getArguments().getString("desc") + "\nStatus : " + getArguments().getString("status"))
                         .setPositiveButton("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

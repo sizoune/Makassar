@@ -5,6 +5,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ public class DetailBand extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webviewcuy);
 
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapse_toolbar);
-        collapsingToolbar.setTitle("Detail");
+//        collapsingToolbar.setTitle("Detail");
 //        collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.putih));
 //        collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.putih));
 
@@ -44,7 +45,7 @@ public class DetailBand extends AppCompatActivity {
         String s = "";
         String url = "";
         if (b != null) {
-            collapsingToolbar.setTitle((String) b.get("namaband"));
+            collapsingToolbar.setTitle("");
             s = (String) b.get("descband");
             url = (String) b.get("imgurl");
             Picasso.with(this.getApplicationContext()).load(url).into(foto);
@@ -53,5 +54,23 @@ public class DetailBand extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadData(s, "text/html", "UTF-8");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            android.app.FragmentManager fm = getFragmentManager();
+            fm.popBackStack();
+            finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

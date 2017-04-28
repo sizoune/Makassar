@@ -25,6 +25,7 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:label=""
             android:name=".DetailBand"
             android:parentActivityName=".LandingPage" />
     </application>
