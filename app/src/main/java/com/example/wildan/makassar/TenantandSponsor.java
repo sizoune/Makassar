@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -92,9 +95,25 @@ public class TenantandSponsor extends Fragment implements BaseSliderView.OnSlide
 
         try {
             if (getArguments().getString("nama") != null) {
+                View vi = View.inflate(getContext(), R.layout.popup_tenant, null);
+                TextView nama = (TextView) vi.findViewById(R.id.txtband);
+                TextView status = (TextView) vi.findViewById(R.id.txtStatus);
+                WebView desc = (WebView) vi.findViewById(R.id.descTenant);
+                nama.setText(getArguments().getString("nama"));
+                status.setText(getArguments().getString("status"));
+                desc.setWebViewClient(new WebViewClient());
+                desc.getSettings().setJavaScriptEnabled(true);
+                desc.loadData(getArguments().getString("desc"), "text/html", "UTF-8");
+                nama.setBackground(v.getResources().getDrawable(R.drawable.my_border1));
+                if (status.getText().toString().equals("Closed")) {
+                    status.setBackground(v.getResources().getDrawable(R.drawable.my_border2));
+                } else {
+                    status.setBackground(v.getResources().getDrawable(R.drawable.my_border));
+                }
                 mMaterialDialog = new MaterialDialog(TenantandSponsor.this.getContext())
                         .setTitle("Tenant Changed !")
-                        .setMessage("Tenant name : " + getArguments().getString("nama")+ "\nDescription : " + getArguments().getString("desc") + "\nStatus : " + getArguments().getString("status"))
+                        .setView(vi)
+                        //.setMessage("Tenant name : " + getArguments().getString("nama") + "\nDescription : " + getArguments().getString("desc") + "\nStatus : " + getArguments().getString("status"))
                         .setPositiveButton("OK", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
